@@ -29,4 +29,4 @@ jobs:
           path: playwright-report/
           retention-days: 30
       - name: Trigger deployment
-        run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVIDE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+        run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
