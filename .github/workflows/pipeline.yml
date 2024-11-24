@@ -35,6 +35,6 @@ jobs:
         if: ${{github.event_name == 'push'}}
         run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.64.0
+        uses: anothrNick/github-tag-action@1.71.0
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
