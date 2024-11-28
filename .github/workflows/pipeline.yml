@@ -50,15 +50,15 @@ jobs:
     steps:
       - uses: action@checkout@v4
       - name: Test Success
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: success()
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           severity: info
-          details: Test Succeded!
+          details: Test Succeeded!
           text: A new version of Pokedex deployed
       - name: Test Failure
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: failure()
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
