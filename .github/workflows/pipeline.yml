@@ -50,18 +50,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Test Success
-        uses: rjstone/discord-webhook-notify@v1.0.4
-        if: ${{github.event_name == 'push' && success()}}
+        uses: Marvv90/discord-notify@1.0.0
+        if: ${{ success() }}
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          severity: info
-          details: Test Succeeded!
-          text: A new version of Pokedex deployed
+          github-token: ${{ secrets.GITHUB_TOKEN}}
+          discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          discord-clr-success: 17cf48
       - name: Test Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
-        if: ${{github.event_name == 'push' && failure()}}
+        uses: Marvv90/discord-notify@1.0.0
+        if: ${{ failure() }}
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          severity: error
-          details: Test Failed!
-          text: Build Failed
+            github-token: ${{ secrets.GITHUB_TOKEN}}
+            discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
+            discord-clr-failure: e72727
