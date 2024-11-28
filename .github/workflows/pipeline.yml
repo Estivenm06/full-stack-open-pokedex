@@ -51,7 +51,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: success()
+        if: ${{github.event_name == 'push' && success()}}
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           severity: info
@@ -59,7 +59,7 @@ jobs:
           text: A new version of Pokedex deployed
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: failure()
+        if: ${{github.event_name == 'push' && failure()}}
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           severity: error
