@@ -47,19 +47,19 @@ jobs:
   webhook-notify:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Test Success
-        uses: rjstone/discord-webhook-notify@v1
+        uses: Marvv90/discord-notify@1.0.0
         if: ${{ success() }}
         with:
-          severity: info
-          details: Test Succeeded!
-          text: A new version of Pokedex deployed
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          github-token: ${{ secrets.GITHUB_TOKEN}}
+          discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          discord-clr-success: 17cf48
       - name: Test Failure
-        uses: rjstone/discord-webhook-notify@v1
+        uses: Marvv90/discord-notify@1.0.0
         if: ${{ failure() }}
         with:
-          severity: error
-          details: Test Failed!
-          text: Build Failed
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            github-token: ${{ secrets.GITHUB_TOKEN}}
+            discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
+            discord-clr-success: 17cf48
+            discord-clr-failure: e72727
