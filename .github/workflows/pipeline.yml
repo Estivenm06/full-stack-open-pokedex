@@ -10,7 +10,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -35,7 +35,7 @@ jobs:
         run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
   tag_release:
     needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Bump version and push tag
@@ -46,22 +46,22 @@ jobs:
           DEFAULT_BUMP: "patch"
   webhook-notify:
     needs: [tag_release]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: ${{github.event_name == 'push' && success()}}
+        if: success()
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           severity: info
           details: Test Succeeded!
           text: A new version of Pokedex deployed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: ${{github.event_name == 'push' && failure()}}
+        if: failure()
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           severity: error
           details: Test Failed!
           text: Build Failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
