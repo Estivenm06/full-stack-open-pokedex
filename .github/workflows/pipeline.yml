@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 16
       - run: npm install
       - run: npm run eslint
       - run: npm run build
@@ -51,7 +51,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: success()
+        if: ${{ success() }}
         with:
           severity: info
           details: Test Succeeded!
@@ -59,7 +59,7 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: failure()
+        if: ${{ failure() }}
         with:
           severity: error
           details: Test Failed!
