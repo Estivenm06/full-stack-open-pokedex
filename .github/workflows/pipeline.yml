@@ -48,7 +48,7 @@ jobs:
     needs: [tag_release]
     runs-on: ubuntu-20.04
     steps:
-      - uses: action@checkout@v4
+      - uses: actions/checkout@v4
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1.0.4
         if: success()
