@@ -60,6 +60,6 @@ jobs:
         uses: Marvv90/discord-notify@1.0.0
         if: ${{ failure() }}
         with:
-            github-token: ${{ secrets.GITHUB_TOKEN}}
-            discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
-            discord-clr-failure: e72727
+          github-token: ${{ secrets.GITHUB_TOKEN}}
+          discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          discord-clr-failure: e72727
