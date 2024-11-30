@@ -2,7 +2,8 @@ name: Url Health Check
 
 on:
   schedule:
-    - cron: "59 23 * * *"
+     - cron: "*/10 * * * *"
+    #- cron: "59 23 * * *"
   push:
     branches:
       - main
@@ -13,14 +14,9 @@ on:
 jobs:
   check-url-health:
     runs-on: ubuntu-20.04
+    env:
+      URL: "http://localhost:5000"
+      METHOD: GET
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-            node-version: 20
-      - run: npm install
-      - run: npm run build
-      - name: URL Health Check
-        uses: Jtalk/url-health-check-action@v4
-        with:
-          url: 'http://localhost:5000/'
+      - id: ping
+        uses: sisodiya2421/pinger@v3
