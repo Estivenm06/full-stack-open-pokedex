@@ -19,8 +19,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm run install
+      - run: npm install
       - run: npm run build
+      - name: Run application
+        run: npm run start-prod
       - name: Url check health
         uses: jtalk/url-health-check-action@v4
         with:
