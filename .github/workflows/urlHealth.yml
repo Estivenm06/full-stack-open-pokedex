@@ -14,9 +14,12 @@ on:
 jobs:
   check-url-health:
     runs-on: ubuntu-20.04
-    env:
-      URL: "http://localhost:5000"
-      METHOD: GET
     steps:
-      - id: ping
-        uses: sisodiya2421/pinger@v3
+      - uses: actions/checkout@v4
+      - run: npm run install
+      - run: npm run build
+      - name: Url check health
+        uses: jtalk/url-health-check-action@v4
+        with:
+          url: 'http://localhost:5000'
+          max-attempts: 3
