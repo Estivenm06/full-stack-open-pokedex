@@ -20,11 +20,9 @@ jobs:
         with:
           node-version: 20
       - run: npm install
-      - run: npm run build
-      - name: Run application
-        run: npm run start-prod
       - name: Url check health
-        uses: jtalk/url-health-check-action@v4
+        run: npm run build
+      - uses: jtalk/url-health-check-action@v4
         with:
           url: 'http://localhost:5000'
           max-attempts: 3
