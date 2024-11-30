@@ -2,8 +2,7 @@ name: Url Health Check
 
 on:
   schedule:
-     - cron: "*/10 * * * *"
-    #- cron: "59 23 * * *"
+    - cron: "* * 1 * *"
   push:
     branches:
       - main
@@ -15,14 +14,8 @@ jobs:
   check-url-health:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm install
       - name: Url check health
-        run: npm run build
-      - uses: jtalk/url-health-check-action@v4
+        uses: jtalk/url-health-check-action@v4
         with:
-          url: 'http://localhost:5000'
+          url: 'https://full-stack-open-pokedex-vric.onrender.com/health'
           max-attempts: 3
